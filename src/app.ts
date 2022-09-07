@@ -6,8 +6,8 @@ import * as winston from 'winston';
 import * as expressWinston from 'express-winston';
 import debug from 'debug';
 
-import { CommonRoutesConfig } from './common/common.routes.config';
-import { UsersRoute } from './users/users.routes.config';
+import { CommonRoutesConfig } from './common/common.routes.config.ts';
+import { UsersRoute } from './users/users.routes.config.ts';
 
 const port = 3000;
 const app: express.Application = express();

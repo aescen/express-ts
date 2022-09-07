@@ -1,6 +1,6 @@
 {
   "verbose": true,
-  "delay": 1000,
+  "ignore": ["/dist"]
   "execMap": {
     "ts": "ts-node"
   }

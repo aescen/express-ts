@@ -2,6 +2,7 @@ import express from 'express';
 
 export abstract class CommonRoutesConfig {
   app: express.Application; // routes app
+
   name: string; // routes name
 
   /**

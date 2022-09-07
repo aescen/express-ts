@@ -6,8 +6,9 @@
   "scripts": {
     "start": "tsc && node --unhandled-rejections=strict ./dist/app.js",
     "dev": "nodemon ./src/app.ts",
+    "debug": "export DEBUG=* && npm run start",
     "web": "node --optimize_for_size --max_old_space_size=448 --gc_interval=100 --unhandled-rejections=strict ./dist/app.js",
-    "lint": "eslint ./"
+    "lint": "eslint . --ext .ts --fix"
   },
   "keywords": [],
   "author": "",
@@ -23,8 +24,11 @@
     "@types/cors": "^2.8.12",
     "@types/debug": "^4.1.7",
     "@types/express": "^4.17.13",
-    "eslint": "^8.20.0",
+    "@typescript-eslint/eslint-plugin": "^5.36.2",
+    "@typescript-eslint/parser": "^5.36.2",
+    "eslint": "^8.23.0",
     "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-airbnb-typescript": "^17.0.0",
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-node": "^11.1.0",
     "nodemon": "^2.0.19",

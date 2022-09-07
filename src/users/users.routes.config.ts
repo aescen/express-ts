@@ -1,5 +1,5 @@
 import express from 'express';
-import { CommonRoutesConfig } from './../common/common.routes.config';
+import { CommonRoutesConfig } from '../common/common.routes.config';
 
 /**
  * Routes for /users endpoint
