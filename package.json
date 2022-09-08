@@ -1,5 +1,5 @@
 {
-  "name": "express-typescript-latihan",
+  "name": "express-typescript",
   "version": "1.0.0",
   "description": "",
   "main": "./dist/app.js",
