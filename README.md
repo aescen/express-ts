@@ -25,3 +25,4 @@ Part 3
 - https://blog.logrocket.com/configuring-nodemon-with-typescript
 - https://khalilstemmler.com/blogs/typescript/eslint-for-typescript
 - https://stackoverflow.com/questions/59265981/typescript-eslint-missing-file-extension-ts-import-extensions
+- https://blog.logrocket.com/linting-typescript-using-eslint-and-prettier/

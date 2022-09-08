@@ -6,8 +6,8 @@ import * as winston from 'winston';
 import * as expressWinston from 'express-winston';
 import debug from 'debug';
 
-import { CommonRoutesConfig } from './common/common.routes.config.ts';
-import { UsersRoute } from './users/users.routes.config.ts';
+import CommonRoutesConfig from './common/common.routes.config';
+import UsersRoute from './users/users.routes.config';
 
 const port = 3000;
 const app: express.Application = express();
@@ -41,11 +41,13 @@ app.use(cors());
 // initialize users route & add to main app routes
 routes.push(new UsersRoute(app));
 
+// root / top route
 const runningMessage = `Server is running at http://localhost:${port}`;
 app.get('/', (req: express.Request, res: express.Response) => {
   res.status(200).send(runningMessage);
 });
 
+// listen server
 server.listen(port, () => {
   routes.forEach((route) => {
     debugLog(`Routes configured for ${route.getName()}`);
