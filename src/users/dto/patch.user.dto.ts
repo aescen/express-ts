@@ -2,7 +2,7 @@ import UpdateUserDto from './update.user.dto';
 
 /**
  * PatchUserDto
- * Interface for updating user partially
+ * Interface/types for updating user partially
  * @export
  * @interface PatchUserDto
  * @extends {Partial<UpdateUserDto>}

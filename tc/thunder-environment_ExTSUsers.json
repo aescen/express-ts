@@ -1,0 +1,16 @@
+{
+  "client": "Thunder Client",
+  "environmentName": "ExTSUsers",
+  "dateExported": "2022-09-10T17:08:49.797Z",
+  "version": "1.0",
+  "variables": [
+    {
+      "name": "refreshToken",
+      "value": ""
+    },
+    {
+      "name": "accessToken",
+      "value": ""
+    }
+  ]
+}

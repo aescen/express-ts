@@ -1,6 +1,6 @@
 /**
  * UpdateUserDto
- * Interface for updating user
+ * Interface/types for updating user
  * @export
  * @interface UpdateUserDto
  */
@@ -10,5 +10,5 @@ export default interface UpdateUserDto {
   password: string;
   firstName: string;
   lastName: string;
-  permissionLevel: string;
+  permissionFlag: number;
 }

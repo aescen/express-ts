@@ -1,6 +1,6 @@
-/* eslint-disable class-methods-use-this */
 import express from 'express';
-import debug from 'debug';
+
+import debug from '../../utils/debug.util';
 
 import usersService from '../services/users.service';
 
@@ -14,30 +14,6 @@ const log: debug.IDebugger = debug('app:users-controller');
 class UsersMiddleware {
   constructor() {
     this.validatePatchEmail = this.validatePatchEmail.bind(this);
-  }
-
-  /**
-   * validateUserBodyFields
-   * Validate user body fields
-   * @param {express.Request} req
-   * @param {express.Response} res
-   * @param {express.NextFunction} next
-   * @returns
-   * @memberof UsersMiddleware
-   */
-  async validateUserBodyFields(
-    req: express.Request,
-    res: express.Response,
-    next: express.NextFunction,
-  ) {
-    if (!req.body && !req.body.email && !req.body.password) {
-      res.status(400).send({
-        error: `Missing required fields email and password`,
-      });
-      return;
-    }
-
-    next();
   }
 
   /**
@@ -57,11 +33,10 @@ class UsersMiddleware {
     const user = await usersService.readByEmail(req.body.email);
 
     if (user) {
-      res.status(400).send({ error: `User email already exists` });
-      return;
+      return res.status(400).send({ error: `User email already exists` });
     }
 
-    next();
+    return next();
   }
 
   /**
@@ -78,14 +53,13 @@ class UsersMiddleware {
     res: express.Response,
     next: express.NextFunction,
   ) {
-    const user = await usersService.readByEmail(req.body.email);
+    const isValid = res.locals.user._id === req.body.id;
 
-    if (!user || user.id !== req.params.userId) {
-      res.status(400).send({ error: `Invalid email` });
-      return;
+    if (!isValid) {
+      return res.status(400).send({ error: `Invalid email` });
     }
 
-    next();
+    return next();
   }
 
   /**
@@ -103,12 +77,11 @@ class UsersMiddleware {
     next: express.NextFunction,
   ) {
     if (!req.body.email) {
-      res.status(400).send({ error: `Invalid email` });
-      return;
+      return res.status(400).send({ error: `Invalid email` });
     }
 
     log('Validating email', req.body.email);
-    this.validateEmailBelongsToUser(req, res, next);
+    return this.validateEmailBelongsToUser(req, res, next);
   }
 
   /**
@@ -125,16 +98,16 @@ class UsersMiddleware {
     res: express.Response,
     next: express.NextFunction,
   ) {
-    const user = usersService.readById(req.params.userId);
+    const user = await usersService.readById(req.body.id);
 
     if (!user) {
-      res.status(404).send({
-        error: `User ${req.params.userId} not found`,
+      return res.status(404).send({
+        error: `User ${req.body.id} not found`,
       });
-      return;
     }
 
-    next();
+    res.locals.user = user;
+    return next();
   }
 
   /**
@@ -151,7 +124,26 @@ class UsersMiddleware {
     next: express.NextFunction,
   ) {
     req.body.id = req.params.userId;
-    next();
+
+    return next();
+  }
+
+  async userCannotChangePermission(
+    req: express.Request,
+    res: express.Response,
+    next: express.NextFunction,
+  ) {
+    const isUnauthorized =
+      'permissionFlag' in req.body &&
+      req.body.permissionFlag !== res.locals.user.permissionFlag;
+
+    if (isUnauthorized) {
+      return res.status(400).send({
+        errors: ['User cannot change permission flags'],
+      });
+    }
+
+    return next();
   }
 }
 

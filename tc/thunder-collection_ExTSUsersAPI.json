@@ -1,0 +1,306 @@
+{
+  "client": "Thunder Client",
+  "collectionName": "ExTSUsersAPI",
+  "dateExported": "2022-09-10T17:07:38.975Z",
+  "version": "1.1",
+  "folders": [
+    {
+      "_id": "ceb167a4-8349-4def-9e0a-2cebe0bd6bbb",
+      "name": "users",
+      "containerId": "",
+      "created": "2022-09-09T09:27:05.486Z",
+      "sortNum": 10000
+    },
+    {
+      "_id": "72e33478-bc6f-4ccc-988a-62d69486dc43",
+      "name": "auth",
+      "containerId": "",
+      "created": "2022-09-09T09:27:18.231Z",
+      "sortNum": 20000
+    }
+  ],
+  "requests": [
+    {
+      "_id": "834555be-5f96-41bd-8ac2-3bda15755ae3",
+      "colId": "a56e1d77-0a13-486f-9bd6-ca6eca8298fc",
+      "containerId": "ceb167a4-8349-4def-9e0a-2cebe0bd6bbb",
+      "name": "Add user",
+      "url": "http://localhost:3000/users/",
+      "method": "POST",
+      "sortNum": 10000,
+      "created": "2022-09-09T09:26:40.757Z",
+      "modified": "2022-09-10T12:27:32.022Z",
+      "headers": [],
+      "params": [],
+      "body": {
+        "type": "json",
+        "raw": "{\n  \"email\": \"test99@gmail.com\",\n  \"password\": \"pass123\",\n  \"firstName\": \"name\",\n  \"lastName\": \"mane\"\n}",
+        "form": []
+      },
+      "auth": { "type": "bearer" },
+      "tests": []
+    },
+    {
+      "_id": "6917caa5-b6ef-43e5-a731-fd4f234c94f8",
+      "colId": "a56e1d77-0a13-486f-9bd6-ca6eca8298fc",
+      "containerId": "72e33478-bc6f-4ccc-988a-62d69486dc43",
+      "name": "Add auth free user",
+      "url": "http://localhost:3000/auth/",
+      "method": "POST",
+      "sortNum": 10000,
+      "created": "2022-09-09T09:27:54.415Z",
+      "modified": "2022-09-10T12:26:15.557Z",
+      "headers": [],
+      "params": [],
+      "body": {
+        "type": "json",
+        "raw": "{\n  \"email\": \"test1@gmail.com\",\n  \"password\": \"pass123\"\n}",
+        "form": []
+      },
+      "auth": { "type": "bearer" },
+      "tests": [
+        {
+          "type": "set-env-var",
+          "custom": "json.accessToken",
+          "action": "setto",
+          "value": "{{accessToken}}"
+        },
+        {
+          "type": "set-env-var",
+          "custom": "json.refreshToken",
+          "action": "setto",
+          "value": "{{refreshToken}}"
+        }
+      ]
+    },
+    {
+      "_id": "fc26f880-c91e-4922-895d-30c3a17f0fe4",
+      "colId": "a56e1d77-0a13-486f-9bd6-ca6eca8298fc",
+      "containerId": "72e33478-bc6f-4ccc-988a-62d69486dc43",
+      "name": "Add auth paid user",
+      "url": "http://localhost:3000/auth/",
+      "method": "POST",
+      "sortNum": 12500,
+      "created": "2022-09-10T12:25:12.716Z",
+      "modified": "2022-09-10T12:25:12.716Z",
+      "headers": [],
+      "params": [],
+      "body": {
+        "type": "json",
+        "raw": "{\n  \"email\": \"test2@gmail.com\",\n  \"password\": \"pass123\"\n}",
+        "form": []
+      },
+      "auth": { "type": "bearer" },
+      "tests": [
+        {
+          "type": "set-env-var",
+          "custom": "json.accessToken",
+          "action": "setto",
+          "value": "{{accessToken}}"
+        },
+        {
+          "type": "set-env-var",
+          "custom": "json.refreshToken",
+          "action": "setto",
+          "value": "{{refreshToken}}"
+        }
+      ]
+    },
+    {
+      "_id": "6cd33b06-43b5-4b5f-befa-78e7915a94c1",
+      "colId": "a56e1d77-0a13-486f-9bd6-ca6eca8298fc",
+      "containerId": "72e33478-bc6f-4ccc-988a-62d69486dc43",
+      "name": "Add auth admin",
+      "url": "http://localhost:3000/auth/",
+      "method": "POST",
+      "sortNum": 13750,
+      "created": "2022-09-10T12:25:15.069Z",
+      "modified": "2022-09-10T12:26:01.072Z",
+      "headers": [],
+      "params": [],
+      "body": {
+        "type": "json",
+        "raw": "{\n  \"email\": \"admin@gmail.com\",\n  \"password\": \"pass123\"\n}",
+        "form": []
+      },
+      "auth": { "type": "bearer" },
+      "tests": [
+        {
+          "type": "set-env-var",
+          "custom": "json.accessToken",
+          "action": "setto",
+          "value": "{{accessToken}}"
+        },
+        {
+          "type": "set-env-var",
+          "custom": "json.refreshToken",
+          "action": "setto",
+          "value": "{{refreshToken}}"
+        }
+      ]
+    },
+    {
+      "_id": "0d9a479d-a264-4015-b598-18df8f00540c",
+      "colId": "a56e1d77-0a13-486f-9bd6-ca6eca8298fc",
+      "containerId": "ceb167a4-8349-4def-9e0a-2cebe0bd6bbb",
+      "name": "Get users",
+      "url": "http://localhost:3000/users/",
+      "method": "GET",
+      "sortNum": 20000,
+      "created": "2022-09-10T10:05:06.634Z",
+      "modified": "2022-09-10T10:28:58.534Z",
+      "headers": [],
+      "params": [],
+      "auth": { "type": "bearer", "bearer": "{{accessToken}}" },
+      "tests": []
+    },
+    {
+      "_id": "87403157-0ea0-4f45-a5e9-4b735910fa68",
+      "colId": "a56e1d77-0a13-486f-9bd6-ca6eca8298fc",
+      "containerId": "72e33478-bc6f-4ccc-988a-62d69486dc43",
+      "name": "Refresh auth token",
+      "url": "http://localhost:3000/auth/refresh-token",
+      "method": "POST",
+      "sortNum": 20000,
+      "created": "2022-09-10T10:06:00.071Z",
+      "modified": "2022-09-10T10:19:59.752Z",
+      "headers": [],
+      "params": [],
+      "body": {
+        "type": "json",
+        "raw": "{\n  \"refreshToken\": \"{{refreshToken}}\"\n}",
+        "form": []
+      },
+      "auth": { "type": "bearer", "bearer": "{{accessToken}}" },
+      "tests": [
+        {
+          "type": "set-env-var",
+          "custom": "json.acceessToken",
+          "action": "setto",
+          "value": "{{accessToken}}"
+        },
+        {
+          "type": "set-env-var",
+          "custom": "json.refreshToken",
+          "action": "setto",
+          "value": "{{refreshToken}}"
+        }
+      ]
+    },
+    {
+      "_id": "8c65221c-4d19-4f54-9aa1-80d5d3f18dc9",
+      "colId": "a56e1d77-0a13-486f-9bd6-ca6eca8298fc",
+      "containerId": "ceb167a4-8349-4def-9e0a-2cebe0bd6bbb",
+      "name": "Get user",
+      "url": "http://localhost:3000/users/jx0J-Zi5z",
+      "method": "GET",
+      "sortNum": 30000,
+      "created": "2022-09-10T10:24:31.680Z",
+      "modified": "2022-09-10T10:56:31.670Z",
+      "headers": [],
+      "params": [],
+      "auth": { "type": "bearer", "bearer": "{{accessToken}}" },
+      "tests": []
+    },
+    {
+      "_id": "3b3c41ac-0dc0-4464-bb33-8a02c74ced4b",
+      "colId": "a56e1d77-0a13-486f-9bd6-ca6eca8298fc",
+      "containerId": "ceb167a4-8349-4def-9e0a-2cebe0bd6bbb",
+      "name": "Put user",
+      "url": "http://localhost:3000/users/jx0J-Zi5z",
+      "method": "PUT",
+      "sortNum": 40000,
+      "created": "2022-09-10T10:29:17.909Z",
+      "modified": "2022-09-10T11:19:39.351Z",
+      "headers": [],
+      "params": [],
+      "body": {
+        "type": "json",
+        "raw": "{\n  \"email\": \"test1@gmail.com\",\n  \"password\": \"pass123\",\n  \"firstName\": \"name\",\n  \"lastName\": \"mane\",\n  \"permissionFlag\": 1\n}",
+        "form": []
+      },
+      "auth": { "type": "bearer", "bearer": "{{accessToken}}" },
+      "tests": []
+    },
+    {
+      "_id": "4d53693f-3d00-4c69-8ff7-ed2ebe59db62",
+      "colId": "a56e1d77-0a13-486f-9bd6-ca6eca8298fc",
+      "containerId": "ceb167a4-8349-4def-9e0a-2cebe0bd6bbb",
+      "name": "Patch user",
+      "url": "http://localhost:3000/users/jx0J-Zi5z",
+      "method": "PATCH",
+      "sortNum": 45000,
+      "created": "2022-09-10T12:19:00.585Z",
+      "modified": "2022-09-10T12:23:59.382Z",
+      "headers": [],
+      "params": [],
+      "body": {
+        "type": "json",
+        "raw": "{\n  \"email\": \"test1@gmail.com\",\n  \"firstName\": \"named\",\n  \"lastName\": \"maned\"\n}",
+        "form": []
+      },
+      "auth": { "type": "bearer", "bearer": "{{accessToken}}" },
+      "tests": []
+    },
+    {
+      "_id": "c7852c7e-9735-4381-8780-c3bc8d63348c",
+      "colId": "a56e1d77-0a13-486f-9bd6-ca6eca8298fc",
+      "containerId": "ceb167a4-8349-4def-9e0a-2cebe0bd6bbb",
+      "name": "Put user paid",
+      "url": "http://localhost:3000/users/_JNropWe7",
+      "method": "PUT",
+      "sortNum": 50000,
+      "created": "2022-09-10T10:32:23.019Z",
+      "modified": "2022-09-10T12:21:24.524Z",
+      "headers": [],
+      "params": [],
+      "body": {
+        "type": "json",
+        "raw": "{\n  \"email\": \"test2@gmail.com\",\n  \"password\": \"pass123\",\n  \"firstName\": \"name\",\n  \"lastName\": \"manned\",\n  \"permissionFlag\": 2\n}",
+        "form": []
+      },
+      "auth": { "type": "bearer", "bearer": "{{accessToken}}" },
+      "tests": []
+    },
+    {
+      "_id": "995a1963-3b5a-4f96-b33b-4f137fa223be",
+      "colId": "a56e1d77-0a13-486f-9bd6-ca6eca8298fc",
+      "containerId": "ceb167a4-8349-4def-9e0a-2cebe0bd6bbb",
+      "name": "Patch user paid",
+      "url": "http://localhost:3000/users/_JNropWe7",
+      "method": "PATCH",
+      "sortNum": 60000,
+      "created": "2022-09-10T12:24:38.039Z",
+      "modified": "2022-09-10T12:26:52.825Z",
+      "headers": [],
+      "params": [],
+      "body": {
+        "type": "json",
+        "raw": "{\n  \"email\": \"test2@gmail.com\",\n  \"firstName\": \"named\",\n  \"lastName\": \"maned\"\n}",
+        "form": []
+      },
+      "auth": { "type": "bearer", "bearer": "{{accessToken}}" },
+      "tests": []
+    },
+    {
+      "_id": "d53e49c1-5347-4a90-96d2-5e39519306d6",
+      "colId": "a56e1d77-0a13-486f-9bd6-ca6eca8298fc",
+      "containerId": "ceb167a4-8349-4def-9e0a-2cebe0bd6bbb",
+      "name": "Delete user",
+      "url": "http://localhost:3000/users/xUrCrs8_S",
+      "method": "DELETE",
+      "sortNum": 70000,
+      "created": "2022-09-10T12:27:42.421Z",
+      "modified": "2022-09-10T12:28:10.733Z",
+      "headers": [],
+      "params": [],
+      "auth": { "type": "bearer", "bearer": "{{accessToken}}" },
+      "tests": []
+    }
+  ],
+  "settings": {
+    "headers": [],
+    "tests": [],
+    "envId": "a1e0f330-9370-4769-b56a-5dd854bb5442"
+  }
+}
