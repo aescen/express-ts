@@ -1,4 +1,3 @@
-/* eslint-disable class-methods-use-this */
 import UsersDao from '../dao/users.dao';
 import CreateUserDto from '../dto/create.user.dto';
 import UpdateUserDto from '../dto/update.user.dto';
@@ -24,9 +23,8 @@ class UsersService implements CRUD {
    * @returns
    * @memberof UsersService
    */
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   async list(limit: number, page: number) {
-    return UsersDao.getUsers();
+    return UsersDao.getUsers(limit, page);
   }
 
   /**
@@ -52,6 +50,17 @@ class UsersService implements CRUD {
   }
 
   /**
+   * readByEmailWithPassword
+   * Get user with password by email
+   * @param {string} email
+   * @returns
+   * @memberof UsersService
+   */
+  async readByEmailWithPassword(email: string) {
+    return UsersDao.getUserByEmailWithPassword(email);
+  }
+
+  /**
    * updateById
    * Update user by id
    * @param {string} id
@@ -72,7 +81,7 @@ class UsersService implements CRUD {
    * @memberof UsersService
    */
   async partialUpdateById(id: string, resource: PatchUserDto) {
-    return UsersDao.partialUpdateUserById(id, resource);
+    return UsersDao.updateUserById(id, resource);
   }
 
   /**

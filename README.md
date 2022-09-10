@@ -17,6 +17,12 @@ Part 3
 - Adding security layer with JWT
 - Automate testing
 
+## Required env
+
+    DB_URL=...
+    JWT_SECRET=...
+    TOKEN_EXPIRATION=...
+
 ## Sources
 
 - https://www.toptal.com/express-js/nodejs-typescript-rest-api-pt-1
@@ -26,3 +32,4 @@ Part 3
 - https://khalilstemmler.com/blogs/typescript/eslint-for-typescript
 - https://stackoverflow.com/questions/59265981/typescript-eslint-missing-file-extension-ts-import-extensions
 - https://blog.logrocket.com/linting-typescript-using-eslint-and-prettier/
+- https://stackoverflow.com/questions/62736961/how-do-i-load-dotenv-in-typescript

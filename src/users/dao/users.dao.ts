@@ -1,11 +1,16 @@
 import shortid from 'shortid';
-import debug from 'debug';
+
+import debug from '../../utils/debug.util';
 
 import CreateUserDto from '../dto/create.user.dto';
 import UpdateUserDto from '../dto/update.user.dto';
 import PatchUserDto from '../dto/patch.user.dto';
 
-const log: debug.IDebugger = debug('app:in-memory-dao');
+import UsersModel from '../models/users.model';
+
+import PermissionFlag from '../../common/middleware/common.permission.flag.enum';
+
+const log: debug.IDebugger = debug('app:mongodb-dao');
 
 /**
  * UsersDao
@@ -13,13 +18,11 @@ const log: debug.IDebugger = debug('app:in-memory-dao');
  * @class UsersDao
  */
 class UsersDao {
-  #users: Array<CreateUserDto> = [];
-
   #allowedPatchedFields: Array<string> = [
     'password',
     'firstName',
     'lastName',
-    'permissionLevel',
+    'permissionFlag',
   ];
 
   constructor() {
@@ -52,11 +55,16 @@ class UsersDao {
    * @returns
    * @memberof UsersDao
    */
-  async addUser(user: CreateUserDto) {
+  async addUser(userFields: CreateUserDto) {
     // eslint-disable-next-line no-param-reassign
-    user.id = shortid.generate();
-    this.#users.push(user);
-    return user.id;
+    const userId = shortid.generate();
+    const user = new UsersModel({
+      _id: userId,
+      ...userFields,
+      permissionFlag: PermissionFlag.FREE_PERMISSION,
+    });
+    await user.save();
+    return userId;
   }
 
   /**
@@ -65,8 +73,11 @@ class UsersDao {
    * @returns
    * @memberof UsersDao
    */
-  async getUsers() {
-    return this.#users;
+  async getUsers(limit = 25, page = 0) {
+    return UsersModel.find()
+      .limit(limit)
+      .skip(limit * page)
+      .exec();
   }
 
   /**
@@ -77,9 +88,7 @@ class UsersDao {
    * @memberof UsersDao
    */
   async getUserById(userId: string) {
-    return (
-      this.#users.find((user: { id: string }) => user.id === userId) ?? null
-    );
+    return UsersModel.findOne({ _id: userId }).exec();
   }
 
   /**
@@ -90,10 +99,20 @@ class UsersDao {
    * @memberof UsersDao
    */
   async getUserByEmail(email: string) {
-    return (
-      this.#users.find((user: { email: string }) => user.email === email) ??
-      null
-    );
+    return UsersModel.findOne({ email }).exec();
+  }
+
+  /**
+   * getUserByEmailWithPassword
+   * Get user with password by email
+   * @param {string} email
+   * @returns
+   * @memberof UsersDao
+   */
+  async getUserByEmailWithPassword(email: string) {
+    return UsersModel.findOne({ email })
+      .select('_id email permissionFlag +password')
+      .exec();
   }
 
   /**
@@ -104,32 +123,17 @@ class UsersDao {
    * @returns
    * @memberof UsersDao
    */
-  async updateUserById(userId: string, newUser: UpdateUserDto) {
-    const userIndex = this.#users.findIndex(
-      (user: { id: string }) => user.id === userId,
+  async updateUserById(
+    userId: string,
+    userFields: UpdateUserDto | PatchUserDto,
+  ) {
+    const existingUser = UsersModel.findOneAndUpdate(
+      { _id: userId },
+      { $set: userFields },
+      { new: true },
     );
-    this.#users.splice(userIndex, 1, newUser);
 
-    return `${userId} updated via put`;
-  }
-
-  /**
-   * partialUpdateUserById
-   * Partially update user by id
-   * @param {string} userId
-   * @param {PatchUserDto} newUser
-   * @returns
-   * @memberof UsersDao
-   */
-  async partialUpdateUserById(userId: string, newUser: PatchUserDto) {
-    const userIndex = this.#users.findIndex(
-      (user: { id: string }) => user.id === userId,
-    );
-    const currentUser = this.#users[userIndex];
-    const user = this.#getPatchedUser(currentUser, newUser);
-
-    this.#users.splice(userIndex, 1, user);
-    return `${userId} patched`;
+    return existingUser;
   }
 
   /**
@@ -140,12 +144,7 @@ class UsersDao {
    * @memberof UsersDao
    */
   async deleteUserByUserId(userId: string) {
-    const userIndex = this.#users.findIndex(
-      (user: { id: string }) => user.id === userId,
-    );
-    this.#users.splice(userIndex, 1);
-
-    return `${userId} deleted`;
+    return UsersModel.deleteOne({ _id: userId }).exec();
   }
 }
 

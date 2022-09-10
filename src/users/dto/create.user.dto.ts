@@ -1,6 +1,6 @@
 /**
  * CreateUserDto
- * Interface for creating new user from resource
+ * Interface/types for creating new user from resource
  * @export
  * @interface CreateUserDto
  */
@@ -10,5 +10,5 @@ export default interface CreateUserDto {
   password: string;
   firstName: string;
   lastName: string;
-  permissionLevel: string;
+  permissionFlag: number;
 }
