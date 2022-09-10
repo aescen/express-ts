@@ -1,1 +1,0 @@
-"use strict";Object.defineProperty(exports,"__esModule",{value:!0});const chai_1=require("chai");describe("Index Test",(function(){it("should always pass",(function(){(0,chai_1.expect)(!0).to.equal(!0)}))}));
