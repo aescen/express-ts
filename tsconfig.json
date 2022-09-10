@@ -6,8 +6,7 @@
     "strict": true,
     "esModuleInterop": true,
     "inlineSourceMap": true,
-    "noImplicitAny": true,
-    "sourceMap": true
+    "noImplicitAny": true
   },
   "include": ["src/**/*.ts", "test/**/*.ts"],
   "exclude": ["node_modules"]
